@@ -5,3 +5,18 @@
   align-items: center;
   flex-direction: column;
 }
+
+.pokemon-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.controls button {
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+}
