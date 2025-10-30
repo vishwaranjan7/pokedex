@@ -1,11 +1,11 @@
-import Search from "../Search/Search";
-// css import
+import Search from "../Search/Search.jsx";
 import "../Pokedex/Pokedex.css";
+import PokemonList from '../Pokemon lists/PokemonList.jsx'
 function Pokedex() {
   return (
-    <div className="pokedex-wraper">
-      <h1 id="pokedex-heading">Pokedex</h1>
+    < div className="pokedex-wraper">
       <Search />
+      <PokemonList/>
     </div>
   );
 }

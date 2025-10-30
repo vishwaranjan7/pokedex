@@ -31,7 +31,7 @@ function PokemonList() {
     //passing that promises array to axion.all
     const pokemonData = await axios.all(pokemonResultPromiss); //array of 20 pokemon detailed data
 
-    console.log(pokemonData);
+    // console.log(pokemonData);
     // now iterate on tha data of each pokemon and exteact id,name, image, type
     const pokeListResult = pokemonData.map((pokeData) => {
       const pokemon = pokeData.data;
@@ -43,7 +43,7 @@ function PokemonList() {
       };
     });
 
-    console.log(pokeListResult);
+    // console.log(pokeListResult);
 
     setPokemonList(pokeListResult);
 
@@ -60,8 +60,8 @@ function PokemonList() {
         {isLoading
           ? "Loading...."
           : pokemonList.map((p) => (
-              <Pokemon name={p.name} image={p.image} id={p.id} />
-            ))}
+              <Pokemon name={p.name} image={p.image}  key={p.id}  id={p.id}  />
+            ))} 
       </div>
       <div className="controls">
         <button disabled={prevUrl==null} onClick={()=>setPokedexUrl(prevUrl)}>Prev</button>
