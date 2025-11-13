@@ -8,7 +8,6 @@ function usePokemonList() {
     pokedexUrl: "https://pokeapi.co/api/v2/pokemon",
     nextUrl: "",
     prevUrl: "",
-    // type:''
   });
   async function downloadPokemon() {
     setPokemonListState((state) => ({ ...state, isLoading: true }));
@@ -16,7 +15,6 @@ function usePokemonList() {
     const response = await axios.get(pokemonListState.pokedexUrl); //this downloads 20 pokemons
 
     const pokemonResults = response.data.results; //we get array of pokemon from the results
-    console.log("response ise", response.data.pokemon);
 
     setPokemonListState((state) => ({
       ...state,

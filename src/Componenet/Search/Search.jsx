@@ -1,11 +1,18 @@
 // css import
-
+import useDebounce from "../../hooks/useDebouncing";
 import "../Search/Search.css";
-function Search() {
+function Search({updateSearchTerm}) {
+
+  const debounceCallBack=useDebounce((e) => updateSearchTerm(e.target.value))
   return (
-    <>
-      <input id="search-wraper" type="text" placeholder="Pokemon name ..." />
-    </>
+    <div className="searchBar">
+      <input
+        id="search-wraper"
+        type="text"
+        placeholder="Pokemon name ..."
+        onChange={debounceCallBack}
+      />
+    </div>
   );
 }
 

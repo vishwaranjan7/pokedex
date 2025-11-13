@@ -1,40 +1,46 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import usePokemonList from "./usePokemonList";
 
-function usePokemonDetails(id) {
+function usePokemonDetails(id , pokemonName) {
   const [pokemon, setPokemon] = useState({});
   async function downloadPokemon() {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    console.log("Response data", response.data);
+        try {
+           let response;
+      if(pokemonName){
+            response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+      }else{
 
-    const pokemonOfSameTypes = await axios.get(
-      `https://pokeapi.co/api/v2/type/${
-        response.data.types ? response.data.types[0].type.name : ""
-      }`
-    );
-
-    console.log(response);
+        response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      }
+      
+      const pokemonOfSameTypes = await axios.get(`https://pokeapi.co/api/v2/type/${ response.data.types ? response.data.types[0].type.name : " " }`);
+   
     setPokemon({
       name: response.data.name,
       image: response.data.sprites.other.dream_world.front_default,
       weight: response.data.weight,
       height: response.data.height,
       types: response.data.types.map((t) => t.type.name),
-      similerTypePokeomn: pokemonOfSameTypes.data.pokemon.slice(0, 5),
+      similerTypePokeomn: pokemonOfSameTypes.data.pokemon,
+      // .slice(0, 5),
     });
 
     setPokemonListState({
       ...pokemonListState,
       type: response.data.types ? response.data.types[0].type.name : "",
     });
+        } catch (error) {
+          console.log('Something goese wrong.');
+          
+        }
+       
   }
 
-  const [pokemonListState, setPokemonListState] = usePokemonList();
+  const [pokemonListState, setPokemonListState] = useState({})
 
   useEffect(() => {
     downloadPokemon();
-    console.log("list", pokemon.type, pokemonListState);
+    // console.log("list", pokemon.type, pokemonListState);
   }, []);
 
   return [pokemon];

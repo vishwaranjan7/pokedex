@@ -4,3 +4,9 @@
   margin-top: 2rem;
   padding: 1rem;
 }
+
+.searchBar{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+}
